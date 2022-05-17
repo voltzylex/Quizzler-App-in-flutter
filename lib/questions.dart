@@ -1,9 +1,9 @@
 
 class Question
 {
-  String questionText = 'a' ;
-  bool questionAnswer = true;
-  Question({ String q='a',bool a=true}){
+  String? questionText ;
+  bool? questionAnswer ;
+  Question( String? q,bool? a){
     questionText = q;
     questionAnswer = a;
   }

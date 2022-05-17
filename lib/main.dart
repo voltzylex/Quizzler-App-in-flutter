@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:quizzler/questions.dart';
+import 'quizz_brain.dart';
 
+Quizzbrain quizzbrain = Quizzbrain();
 void main() => runApp(Quizzler());
 
 class Quizzler extends StatelessWidget {
@@ -32,12 +33,8 @@ class QuizzPage extends StatefulWidget {
 class _QuizzPageState extends State<QuizzPage> {
   List<Widget> scoreKeeper = [];
 
-  List<Question> questionBank = [
-    Question(q: 'You can lead a cow down stairs but not up stairs.', a: false),
-    Question(
-        q: 'Approximately one quarter of human bones are in the feet', a: true),
-    Question(q: 'A slug\'s blodd is green.', a: true)
-  ];
+  List<bool> answers = [true, false, false];
+
   int questionNumber = 0;
   @override
   Widget build(BuildContext context) {
@@ -51,7 +48,7 @@ class _QuizzPageState extends State<QuizzPage> {
             padding: EdgeInsets.all(10),
             child: Center(
               child: Text(
-                questionBank[questionNumber].questionText,
+                quizzbrain.allAnswers[questionNumber].questionText!,
                 textAlign: TextAlign.center,
                 style: TextStyle(color: Colors.white, fontSize: 25),
               ),
@@ -64,8 +61,7 @@ class _QuizzPageState extends State<QuizzPage> {
             child: ElevatedButton(
               style: ElevatedButton.styleFrom(primary: Colors.green),
               onPressed: () {
-                bool correctAnswer =
-                    questionBank[questionNumber].questionAnswer;
+                bool correctAnswer = quizzbrain.allAnswers[questionNumber].questionAnswer!;
                 if (correctAnswer == true) {
                   print("user got it right");
                 } else if (correctAnswer == false) {
@@ -92,11 +88,10 @@ class _QuizzPageState extends State<QuizzPage> {
             child: ElevatedButton(
               style: ElevatedButton.styleFrom(primary: Colors.red),
               onPressed: () {
-                bool correctAnswer =
-                    questionBank[questionNumber].questionAnswer;
-                if (correctAnswer == true) {
+                bool correctAnswer = quizzbrain.allAnswers[questionNumber].questionAnswer!;
+                if (correctAnswer == false) {
                   print("user got it right");
-                } else if (correctAnswer == false) {
+                } else if (correctAnswer == true) {
                   print("user got it wrong");
                 }
                 setState(() {
